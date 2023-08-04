@@ -13,7 +13,9 @@ import TopArtists from "../pages/TopArtists";
 import Playlist from "../pages/Playlist";
 import TopCharts from "../pages/TopCharts";
 import MusicPlayer from "../components/music-player";
+import AccountGeneral from "../pages/AccountGeneral";
 import { useSelector } from "react-redux";
+import PlaylistDetails from "../pages/PlaylistDetails";
 
 function Router() {
   const { activeSong } = useSelector((state) => state.player);
@@ -29,9 +31,11 @@ function Router() {
           }
         >
           <Route index element={<HomePage />} />
+          <Route path="account" element={<AccountGeneral />} />
           <Route path="songs/:songId" element={<SongDetails />} />
           <Route path="artists/:artistId" element={<ArtistDetails />} />
           <Route path="playlists" element={<Playlist />} />
+          <Route path="playlists/:playlistId" element={<PlaylistDetails />} />
           <Route path="top-artists" element={<TopArtists />} />
           <Route path="top-charts" element={<TopCharts />} />
         </Route>

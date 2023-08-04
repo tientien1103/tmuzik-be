@@ -49,19 +49,6 @@ export const getUser = (id) => async (dispatch) => {
   }
 };
 
-// export const recoreUserHistory = ({userId, data,}) => async (dispatch) => {
-//   dispatch(startLoading());
-//   try {
-//     const res = await apiService.post(`/userHistory`,{
-//       action:"playSong"
-//     });
-//     dispatch(recordUserHistorySuccess(res.data));
-//   } catch (error) {
-//     dispatch(hasError(error.message));
-//     toast.error(error.message);
-//   }
-// };
-
 export const updateUserProfile =
   ({ userId, name, avatarUrl }) =>
   async (dispatch) => {

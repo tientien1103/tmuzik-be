@@ -13,7 +13,6 @@ const INITIALIZE = "AUTH.INITIALIZE";
 const LOGIN_SUCCESS = "AUTH.LOGIN_SUCCESS";
 const REGISTER_SUCCESS = "AUTH.REGISTER_SUCCESS";
 const LOGOUT = "AUTH.LOGOUT";
-// const UPDATE_PROFILE = "AUTH.UPDATE_PROFILE";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -44,16 +43,6 @@ const reducer = (state, action) => {
         isAuthenticated: false,
         user: null,
       };
-    // case UPDATE_PROFILE:
-    //   const { name, avatarUrl } = action.payload;
-    //   return {
-    //     ...state,
-    //     user: {
-    //       ...state.user,
-    //       name,
-    //       avatarUrl,
-    //     },
-    //   };
     default:
       return state;
   }
@@ -73,7 +62,6 @@ const setSession = (accessToken) => {
 
 function AuthProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
-  // const updatedProfile = useSelector((state) => state.user.updatedProfile);
 
   useEffect(() => {
     const initialize = async () => {
@@ -108,11 +96,6 @@ function AuthProvider({ children }) {
     };
     initialize();
   }, []);
-
-  // useEffect(() => {
-  //   if (updatedProfile)
-  //     dispatch({ type: UPDATE_PROFILE, payload: updatedProfile });
-  // }, [updatedProfile]);
 
   const login = async ({ email, password }, callback) => {
     const res = await apiService.post("/auth/login", { email, password });

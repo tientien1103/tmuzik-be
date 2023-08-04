@@ -29,13 +29,14 @@ const userHistorySlice = createSlice({
 const { startLoading, hasError, recordSuccess } = userHistorySlice.actions;
 
 export const record =
-  ({ userId, songId, data, action }) =>
+  ({ playlistId, userId, songId, data, action }) =>
   async (dispatch) => {
     dispatch(startLoading());
     try {
       const res = await apiService.post(`/histories`, {
         userId: userId,
         songId: songId,
+        playlistId: playlistId,
         data: data,
         action: action,
       });

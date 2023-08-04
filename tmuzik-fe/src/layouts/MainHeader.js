@@ -5,43 +5,19 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
-import HouseIcon from "@mui/icons-material/House";
-import GroupsIcon from "@mui/icons-material/Groups";
-import Logo from "../components/Logo";
-import AutoGraphIcon from "@mui/icons-material/AutoGraph";
-import QueueMusicIcon from "@mui/icons-material/QueueMusic";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 
-import { Link as RouterLink, useNavigate, NavLink } from "react-router-dom";
+import Logo from "../components/Logo";
+import NavLinks from "../components/NavLinks";
+
+import clsx from "clsx";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import { useDispatch } from "react-redux";
 import { record } from "../features/user-history/userHistorySlice";
 
-const links = [
-  { name: "Discover", to: "/", icon: HouseIcon },
-  { name: "Top Artists", to: "/top-artists", icon: GroupsIcon },
-  { name: "Top Charts", to: "/top-charts", icon: AutoGraphIcon },
-  { name: "Playlist", to: "/playlists", icon: QueueMusicIcon },
-];
-
-const NavLinks = ({ handleClick }) => (
-  <div className="flex flex-col items-center xs:gap-6 md:mt-10 lg:mt-0 md:gap-10 lg:gap-0 xs:mt-10 lg:flex-row lg:mr-14">
-    {links.map((item) => (
-      <NavLink
-        key={item.name}
-        to={item.to}
-        className="flex flex-row text-center items-center mr-6 text-sm font-medium text-white hover:text-primary"
-        onClick={() => handleClick && handleClick()}
-      >
-        <item.icon className="w-6 h-6 mr-2" />
-        {item.name}
-      </NavLink>
-    ))}
-  </div>
-);
-
-export default function MainHeader() {
+export default function MainHeader({ handleClick }) {
   const { user, logout } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -151,9 +127,10 @@ export default function MainHeader() {
         </div>
 
         <div
-          className={`absolute top-0 h-screen w-2/3 bg-gradient-to-tl from-white/10 to-[#483D8B] backdrop-blur-lg z-10 p-6 lg:hidden smooth-transition ${
-            mobileMenuOpen ? "left-0" : "left-full"
-          }`}
+          className={clsx([
+            "absolute top-0 h-screen w-2/3 bg-gradient-to-tl from-white/10 to-[#483D8B] backdrop-blur-lg z-10 p-6 lg:hidden smooth-transition",
+            mobileMenuOpen ? "left-0" : "left-full",
+          ])}
         >
           <NavLinks handleClick={() => setMobileMenuOpen(false)} />
         </div>

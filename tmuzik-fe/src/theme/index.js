@@ -75,7 +75,6 @@ function ThemeProvider({ children }) {
   };
   const theme = createTheme(themeOptions);
 
-  // theme.components = customizeComponents(theme);
   return (
     <MUIThemeProvider theme={theme}>
       <CssBaseline />

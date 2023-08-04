@@ -4,7 +4,7 @@ import logoImg from "../logo.png";
 
 function Logo({ disabledLink = false, sx }) {
   const logo = (
-    <Box sx={{ width: 200, height: 100, ...sx }}>
+    <Box sx={{ width: 150, height: 100, ...sx }}>
       <img src={logoImg} alt="logo" width="100%" />
     </Box>
   );
