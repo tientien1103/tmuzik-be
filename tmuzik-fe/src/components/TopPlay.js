@@ -7,17 +7,23 @@ import { FreeMode } from "swiper/modules";
 import { playPause, setActiveSong } from "../features/player/playerSlice";
 import { getTopChart } from "../features/top-chart/topChartSlice";
 import { getArtists } from "../features/artist/artistSlice";
+import { record } from "../features/user-history/userHistorySlice";
 
 import "swiper/css";
 import "swiper/css/free-mode";
 import TopChartCard from "./TopChartCard";
+import useAuth from "../hooks/useAuth";
 
 const TopPlay = () => {
-  const [page, setPage] = useState(1);
+  const [page] = useState(1);
   const dispatch = useDispatch();
+  const { user } = useAuth();
   const { activeSong, isPlaying } = useSelector((state) => state.player);
-  const { songs } = useSelector((state) => state.topChart);
+  const { currentPageSongs, songsById } = useSelector(
+    (state) => state.topChart
+  );
   const { artists } = useSelector((state) => state.artist);
+  const songs = currentPageSongs.map((songId) => songsById[songId]);
 
   const divRef = useRef(null);
 
@@ -39,19 +45,29 @@ const TopPlay = () => {
 
   const handlePlayClick = (song, i) => {
     dispatch(setActiveSong({ song, songs, i }));
+    dispatch(
+      record({
+        songId: song._id,
+        userId: user._id,
+        data: "play song once",
+        action: "playSong",
+      })
+    );
     dispatch(playPause(true));
   };
 
   return (
     <div
       ref={divRef}
-      className="xl:ml-6 lg:mb-24 ml-0 mb-6 flex-1 xl:max-w-[500px] max-w-full flex flex-col"
+      className="lg:mb-24 mx-6 mb-6 flex-1 lg:max-w-[500px] w-full flex flex-col"
     >
       <div className="w-full flex flex-col">
         <div className="flex flex-row justify-between items-center">
           <h2 className="text-white font-bold text-2xl">Top Charts</h2>
           <Link to="/top-charts">
-            <p className="text-gray-300 text-base cursor-pointer">See all</p>
+            <p className="text-white text-base cursor-pointer hover:text-primary">
+              See all
+            </p>
           </Link>
         </div>
 
@@ -74,7 +90,9 @@ const TopPlay = () => {
         <div className="flex flex-row justify-between items-center">
           <h2 className="text-white font-bold text-2xl">Top Artists</h2>
           <Link to="/top-artists">
-            <p className="text-gray-300 text-base cursor-pointer">See all</p>
+            <p className="text-white text-base cursor-pointer hover:text-primary">
+              See all
+            </p>
           </Link>
         </div>
 

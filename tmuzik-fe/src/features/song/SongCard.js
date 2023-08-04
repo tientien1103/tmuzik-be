@@ -1,12 +1,17 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import useAuth from "../../hooks/useAuth";
+import clsx from "clsx";
 
+import { IconButton } from "@mui/material";
 import PlayPause from "../../components/PlayPause";
+import SongReaction from "./SongReaction";
+import HeadphonesIcon from "@mui/icons-material/Headphones";
+
 import { playPause, setActiveSong } from "../player/playerSlice";
 import { record } from "../user-history/userHistorySlice";
-import SongReaction from "./SongReaction";
-import useAuth from "../../hooks/useAuth";
+import ChartReaction from "../top-chart/ChartReaction";
 
 const SongCard = ({ songId, song, i, isPlaying, activeSong, songs }) => {
   const dispatch = useDispatch();
@@ -32,11 +37,12 @@ const SongCard = ({ songId, song, i, isPlaying, activeSong, songs }) => {
     <div className="flex flex-col w-[250px] p-4 bg-black/5 bg-opacity-10 backdrop-blur-sm animate-slideup rounded-lg cursor-pointer">
       <div className="relative w-full h-56 group">
         <div
-          className={`absolute inset-0 justify-center items-center bg-black bg-opacity-50 group-hover:flex ${
+          className={clsx([
+            "absolute inset-0 justify-center items-center bg-black bg-opacity-50 group-hover:flex",
             activeSong?.title === song.title
               ? "flex bg-black bg-opacity-70"
-              : "hidden"
-          }`}
+              : "hidden",
+          ])}
         >
           <PlayPause
             isPlaying={isPlaying}
@@ -55,17 +61,13 @@ const SongCard = ({ songId, song, i, isPlaying, activeSong, songs }) => {
 
       <div className="mt-4 flex flex-col">
         <p className="font-semibold text-lg text-white truncate capitalize">
-          {songId ? (
-            <Link to={`/songs/${songId}`}>{song.title}</Link>
-          ) : (
-            <Link to={`/songs/${songId}`}>{song.title}</Link>
-          )}
+          <Link to={`/songs/${song._id}`}>{song.title}</Link>
         </p>
         <p className="text-sm truncate text-gray-300 mt-1">
           <Link
             to={
               song.artists
-                ? `/artists/${song?.artists?.adamid}`
+                ? `/artists/${song?.artists[0]?.adamid}`
                 : "/top-artists"
             }
           >
@@ -73,7 +75,16 @@ const SongCard = ({ songId, song, i, isPlaying, activeSong, songs }) => {
           </Link>
         </p>
       </div>
-      <SongReaction song={song} songId={songId} />
+
+      <div className="flex flex-row justify-end">
+        {songId ? <SongReaction song={song} /> : <ChartReaction song={song} />}
+        <IconButton>
+          <HeadphonesIcon sx={{ fontSize: 20, color: "white" }} />
+        </IconButton>
+        <p variant="h6" className="mr-1 mt-1.5 text-white">
+          {song?.playbackCount}
+        </p>
+      </div>
     </div>
   );
 };

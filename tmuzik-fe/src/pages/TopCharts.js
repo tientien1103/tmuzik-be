@@ -4,12 +4,14 @@ import SongCard from "../features/song/SongCard";
 import { getTopChart } from "../features/top-chart/topChartSlice";
 
 const TopCharts = () => {
-  const [page, setPage] = useState(1);
-
-  const { songs } = useSelector((state) => state.topChart);
-  const { activeSong, isPlaying } = useSelector((state) => state.player);
-
+  const [page] = useState(1);
   const dispatch = useDispatch();
+
+  const { songsById, currentPageSongs } = useSelector(
+    (state) => state.topChart
+  );
+  const { activeSong, isPlaying } = useSelector((state) => state.player);
+  const songs = currentPageSongs.map((songId) => songsById[songId]);
 
   useEffect(() => {
     dispatch(getTopChart({ page }));
@@ -21,14 +23,13 @@ const TopCharts = () => {
         Top Charts
       </h2>
 
-      <div className="flex flex-wrap justify-center gap-8">
+      <div className="flex flex-wrap justify-center gap-12">
         {songs.map((song, i) => (
           <div key={song.key} className="flex flex-row items-center">
-            <h3 className="lg:font-bold xs:hidden text-[100px] text-[#4c426e]">
+            <h3 className="lg:font-bold xs:hidden text-[100px] text-thirdly">
               {i + 1}
             </h3>
             <SongCard
-              songId={song._id}
               song={song}
               isPlaying={isPlaying}
               activeSong={activeSong}

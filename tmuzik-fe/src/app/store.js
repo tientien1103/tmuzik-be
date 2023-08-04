@@ -5,6 +5,7 @@ import songReducer from "../features/song/songSlice";
 import playerReducer from "../features/player/playerSlice";
 import artistReducer from "../features/artist/artistSlice";
 import topChartReducer from "../features/top-chart/topChartSlice";
+import playlistReducer from "../features/playlist/playlistSlice";
 
 const rootReducer = {
   user: userReducer,
@@ -12,6 +13,7 @@ const rootReducer = {
   song: songReducer,
   player: playerReducer,
   artist: artistReducer,
+  playlist: playlistReducer,
   topChart: topChartReducer,
 };
 

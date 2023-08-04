@@ -8,19 +8,12 @@ import { setActiveSong, playPause } from "../features/player/playerSlice";
 import { getSongDetail, getSongs } from "../features/song/songSlice";
 
 const SongDetails = () => {
-  const [page, setPage] = useState(1);
+  const [page] = useState(1);
   const { songId } = useParams();
   const dispatch = useDispatch();
   const { song, songs } = useSelector((state) => state.song);
   const { activeSong, isPlaying } = useSelector((state) => state.player);
 
-  useEffect(() => {
-    dispatch(getSongDetail({ songId }));
-  }, [dispatch, songId]);
-
-  useEffect(() => {
-    dispatch(getSongs({ page }));
-  }, [dispatch, page]);
   const handlePauseClick = () => {
     dispatch(playPause(false));
   };
@@ -29,6 +22,14 @@ const SongDetails = () => {
     dispatch(setActiveSong({ song, songs, i }));
     dispatch(playPause(true));
   };
+
+  useEffect(() => {
+    dispatch(getSongDetail({ songId }));
+  }, [dispatch, songId]);
+
+  useEffect(() => {
+    dispatch(getSongs({ page }));
+  }, [dispatch, page]);
 
   return (
     <div className="flex flex-col">

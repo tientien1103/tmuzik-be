@@ -4,15 +4,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { getSongs } from "../features/song/songSlice";
 import SearchInput from "../components/SearchInput";
 import TopPlay from "../components/TopPlay";
+import { LoadingButton } from "@mui/lab";
 
 const HomePage = () => {
   const [filterName, setFilterName] = useState("");
   const [page, setPage] = useState(1);
+  const dispatch = useDispatch();
 
-  const { songs, totalSongs, totalPages } = useSelector((state) => state.song);
+  const { currentPageSongs, songsById, totalSongs, isLoading } = useSelector(
+    (state) => state.song
+  );
   const { activeSong, isPlaying } = useSelector((state) => state.player);
 
-  const dispatch = useDispatch();
+  const songs = currentPageSongs.map((songId) => songsById[songId]);
 
   useEffect(() => {
     dispatch(getSongs({ filterName, page }));
@@ -23,12 +27,12 @@ const HomePage = () => {
   };
 
   return (
-    <div className="flex flex-col mb-24">
+    <div className="container max-w-1072 flex flex-col mb-24">
       <div className="flex lg:flex-row md:flex-col-reverse xs:flex-col-reverse">
         <div className="flex flex-col items-center">
-          <div className="w-full flex justify-center lg:gap-[450px] items-center lg:flex-row-reverse xs:gap-4 md:flex-row-reverse md:gap-[170px] xs:flex-col mt-4 mb-10">
+          <div className="flex justify-center lg:gap-[350px] items-center lg:flex-row-reverse xs:gap-4 md:flex-col-reverse md:gap-6 xs:flex-col mt-4 mb-10">
             <SearchInput handleSubmit={handleSubmit} />
-            <h2 className="font-bold text-3xl text-white">Discover</h2>
+            <h2 className="font-bold text-3xl text-white">New & Trending</h2>
           </div>
 
           {!songs.length && (
@@ -48,8 +52,23 @@ const HomePage = () => {
               />
             ))}
           </div>
+          <div className="mt-10 flex justify-center">
+            {totalSongs ? (
+              <LoadingButton
+                variant="contained"
+                size="small"
+                loading={isLoading}
+                onClick={() => setPage((page) => page + 1)}
+                disabled={Boolean(totalSongs) && songs.length >= totalSongs}
+              >
+                Load more
+              </LoadingButton>
+            ) : (
+              <h6>No post yet</h6>
+            )}
+          </div>
         </div>
-        <div className="xl:sticky lg:w-[500px] relative top-0 h-fit lg:mt-5">
+        <div className="lg:sticky lg:w-[500px] lg:mr-12 relative top-0 h-fit lg:mt-5">
           <TopPlay />
         </div>
       </div>

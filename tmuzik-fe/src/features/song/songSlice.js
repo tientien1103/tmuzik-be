@@ -1,7 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import apiService from "../../app/apiService";
-// import { cloudinaryUpload } from "../../utils/cloudinary";
-// import { toast } from "react-toastify";
 
 const initialState = {
   isLoading: false,
@@ -26,13 +24,17 @@ const songSlice = createSlice({
     getSongSuccess(state, action) {
       state.isLoading = false;
       state.error = null;
+
       state.songs = action.payload.data.songs;
+
       const { count, songs } = action.payload.data;
+
       songs.forEach((song) => {
         state.songsById[song._id] = song;
         if (!state.currentPageSongs.includes(song._id))
           state.currentPageSongs.push(song._id);
       });
+
       state.totalSongs = count;
     },
     getSongDetailSuccess(state, action) {
@@ -45,11 +47,12 @@ const songSlice = createSlice({
       state.error = null;
       const { songId, reactions } = action.payload;
 
-      state.songsById[songId].reactions = reactions;
+      state.songsById[songId].reactions = reactions.data;
     },
-    // resetSongs(state, action) {
-    //   state.songs = [];
-    // },
+    resetSongs(state, action) {
+      state.songsById = {};
+      state.currentPageSongs = [];
+    },
   },
 });
 
@@ -59,6 +62,7 @@ const {
   getSongSuccess,
   getSongDetailSuccess,
   sendSongReactionSuccess,
+  resetSongs,
 } = songSlice.actions;
 
 export const getSongs =
@@ -71,7 +75,7 @@ export const getSongs =
       const res = await apiService.get(`/songs`, {
         params,
       });
-      // if (page === 1) dispatch(resetSongs());
+      if (page === 1) dispatch(resetSongs());
       dispatch(getSongSuccess(res.data));
     } catch (error) {
       dispatch(hasError(error.message));
@@ -95,6 +99,7 @@ export const sendSongReaction =
     dispatch(startLoading());
     try {
       const res = await apiService.post("/reactions", {
+        targetType: "song",
         targetId: songId,
         emoji,
       });

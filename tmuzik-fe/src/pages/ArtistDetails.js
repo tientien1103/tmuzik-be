@@ -8,12 +8,17 @@ import {
   getSongsByArtist,
 } from "../features/artist/artistSlice";
 import { setActiveSong, playPause } from "../features/player/playerSlice";
+import { record } from "../features/user-history/userHistorySlice";
+import useAuth from "../hooks/useAuth";
 
 const ArtistDetails = () => {
-  const [page, setPage] = useState(1);
+  const [page] = useState(1);
   const { artistId } = useParams();
+  const { user } = useAuth();
+
   const { activeSong, isPlaying } = useSelector((state) => state.player);
   const { artist, songs } = useSelector((state) => state.artist);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -29,6 +34,14 @@ const ArtistDetails = () => {
 
   const handlePlayClick = (song, i) => {
     dispatch(setActiveSong({ song, songs, i }));
+    dispatch(
+      record({
+        songId: song._id,
+        userId: user._id,
+        data: "play song once",
+        action: "playSong",
+      })
+    );
     dispatch(playPause(true));
   };
 
