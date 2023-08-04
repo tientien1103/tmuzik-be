@@ -20,10 +20,6 @@ Our company wants to develop an application to bring an amazing music experience
 - [] As a user, I want to be able to see a list of artists.
 - [] As a user, I want to be able to search for artists.
 
-### Comments
-
-- [] As a user, I want to be able to comment for a song.
-
 ### Reactions
 
 - [] As a user, I want to be able to interact with song by liking or disliking.
@@ -34,11 +30,11 @@ Our company wants to develop an application to bring an amazing music experience
 
 ### Playlists
 
-- [] As a user, I want to be able to add favourite song to my playlist.
+- [] As a user, I want to be able to listen available
 
 ### Update Profile
 
-- [] As a user, I want to be able to manage my profile by adding profile picture, and playlist.
+- [] As a user, I want to be able to manage my profile by adding profile picture
 
 ## Endpoint APIs
 
@@ -107,6 +103,16 @@ Our company wants to develop an application to bring an amazing music experience
  */
 ```
 
+### Chart APIs
+
+```javascript
+/**
+ *@route GET /top-chart?page=1&limit=10
+ * @description Get all top song can see with pagination
+ * @access Login required
+ */
+```
+
 ### Artist APIs
 
 ```javascript
@@ -167,21 +173,6 @@ Our company wants to develop an application to bring an amazing music experience
 
 ```javascript
 /**
- * @route PUT /playlists
- * @description Update a playlist
- * @body {name, songId, author}
- * @access Login required
-```
-
-```javascript
-/**
- *  @route DELETE /playlists
- * @description Delete a playlist
- * @access Login required
-```
-
-```javascript
-/**
  * @route GET /playlists/:id
  * @description Get a single playlist
  * @access Login required
@@ -190,8 +181,8 @@ Our company wants to develop an application to bring an amazing music experience
 
 ```javascript
 /**
- * @route GET /playlists/users/:userID
- * @description Get playlists of a user
+ * @route GET /playlists
+ * @description Get playlists
  * @access Login required
  */
 ```
