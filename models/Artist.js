@@ -9,8 +9,7 @@ const artistSchema = new Schema(
     reactions: {
       like: { type: Number, default: 0 },
     },
-        isLiked: { type: Boolean, default: false },
-
+    isLiked: { type: Boolean, default: false },
     isDeleted: { type: Boolean, default: false, select: false },
   },
   { timestamps: true }
