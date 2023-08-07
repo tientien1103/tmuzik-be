@@ -13,8 +13,8 @@ const songSchema = new Schema(
       like: { type: Number, default: 0 },
     },
     playbackCount: { type: Number, default: 0 },
-    // mongoose migration
-    deletedAt: { type: Date, default: null }, //mongoose soft delete
+    isLiked: { type: Boolean, default: false },
+    deletedAt: { type: Date, default: null }, 
   },
   { timestamps: true }
 );
