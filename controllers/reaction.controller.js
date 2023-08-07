@@ -40,13 +40,12 @@ reactionController.saveReaction = catchAsync(async (req, res, next) => {
     throw new AppError(400, `${targetType} not found`, "Create reaction error");
   }
 
-  // Find the reaction if exists
   let reaction = await Reaction.findOne({
     targetType,
     targetId,
     author: currentUserId,
   });
-  // If there is no reaction in the DB, Create the new one
+
   if (!reaction) {
     reaction = await Reaction.create({
       targetType,
@@ -54,16 +53,15 @@ reactionController.saveReaction = catchAsync(async (req, res, next) => {
       author: currentUserId,
       emoji,
     });
+    await mongoose
+      .model(targetType)
+      .findByIdAndUpdate(targetId, { isLiked: true });
   } else {
-    // If there is a previous reaction in the DB -> compare the emojis
-    if (reaction.emoji === emoji) {
-      // If they are the same -> delete reaction
       await reaction.deleteOne();
-    } else {
-      // If they are different -> update reaction
-      reaction.emoji = emoji;
-      await reaction.save();
-    }
+    await mongoose
+      .model(targetType)
+      .findByIdAndUpdate(targetId, { isLiked: false });
+   
   }
 
   const reactions = await calculateReactions(targetId, targetType);
