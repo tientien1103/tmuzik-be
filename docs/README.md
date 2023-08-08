@@ -22,19 +22,19 @@ Our company wants to develop an application to bring an amazing music experience
 
 ### Reactions
 
-- [] As a user, I want to be able to interact with song by liking or disliking.
+- [] As a user, I want to be able to interact with song by liking.
 
 ### Lyrics
 
-- [] As a user, I want to be able to see lyric of each song
+- [] As a user, I want to be able to see lyric of each song.
 
 ### Playlists
 
-- [] As a user, I want to be able to listen available
+- [] As a user, I want to be able to listen available playlist.
 
 ### Update Profile
 
-- [] As a user, I want to be able to manage my profile by adding profile picture
+- [] As a user, I want to be able to manage my profile by adding profile picture and rename.
 
 ## Endpoint APIs
 
