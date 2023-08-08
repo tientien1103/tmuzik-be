@@ -166,7 +166,7 @@ Our company wants to develop an application to bring an amazing music experience
 /**
  * @route POST /playlists
  * @description Create new playlist
- * @body {name, songId, author}
+ * @body {name, songId}
  * @access Login required
  * /
 ```
