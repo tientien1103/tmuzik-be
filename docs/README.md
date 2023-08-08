@@ -74,7 +74,7 @@ Our company wants to develop an application to bring an amazing music experience
  * @description Update user profile
  * @body {name, avatarUrl}
  * @access Login required
- */
+ * /
 ```
 
 ```javascript
@@ -82,7 +82,7 @@ Our company wants to develop an application to bring an amazing music experience
  *@route GET /users/:id
  * @description Get a user profile
  * @access Login required
- */
+ * /
 ```
 
 ### Song APIs
@@ -92,7 +92,7 @@ Our company wants to develop an application to bring an amazing music experience
  *@route GET /songs?page=1&limit=10
  * @description Get all song can see with pagination
  * @access Login required
- */
+ * /
 ```
 
 ```javascript
@@ -100,7 +100,7 @@ Our company wants to develop an application to bring an amazing music experience
  * @route GET /songs/:id
  * @description Get single artist
  * @access Login required
- */
+ * /
 ```
 
 ### Chart APIs
@@ -110,7 +110,7 @@ Our company wants to develop an application to bring an amazing music experience
  *@route GET /top-chart?page=1&limit=10
  * @description Get all top song can see with pagination
  * @access Login required
- */
+ * /
 ```
 
 ### Artist APIs
@@ -120,7 +120,7 @@ Our company wants to develop an application to bring an amazing music experience
  * @route GET /artists?page=1&limit=10
  * @description Get all artist can see with pagination
  * @access Login required
- */
+ * /
 ```
 
 ```javascript
@@ -128,7 +128,7 @@ Our company wants to develop an application to bring an amazing music experience
  *@route GET /artists/:id/songs?page=1&limit=10
  * @description Get all song of one artist user can see with pagination
  * @access Login required
- */
+ * /
 ```
 
 ```javascript
@@ -136,7 +136,7 @@ Our company wants to develop an application to bring an amazing music experience
  * @route GET /artists/:id
  * @description Get single artist
  * @access Login required
- */
+ * /
 ```
 
 ### Lyric APIs
@@ -146,7 +146,7 @@ Our company wants to develop an application to bring an amazing music experience
  * @route GET /lyric/songs/:songId
  * @description Get lyric for a song
  * @access Login required
- */
+ * /
 ```
 
 ### Reaction APIs
@@ -157,7 +157,7 @@ Our company wants to develop an application to bring an amazing music experience
  * @description Save a reaction to song
  * @body {targetId, emoji: "like", "dislike"}
  * @access Login required
- */
+ * /
 ```
 
 ### Playlist APIs
@@ -168,7 +168,7 @@ Our company wants to develop an application to bring an amazing music experience
  * @description Create new playlist
  * @body {name, songId, author}
  * @access Login required
- */
+ * /
 ```
 
 ```javascript
@@ -176,7 +176,7 @@ Our company wants to develop an application to bring an amazing music experience
  * @route GET /playlists/:id
  * @description Get a single playlist
  * @access Login required
- */
+ * /
 ```
 
 ```javascript
@@ -184,5 +184,5 @@ Our company wants to develop an application to bring an amazing music experience
  * @route GET /playlists
  * @description Get playlists
  * @access Login required
- */
+ * /
 ```
