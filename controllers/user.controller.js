@@ -6,14 +6,13 @@ const bcrypt = require("bcryptjs");
 const userController = {};
 
 userController.register = catchAsync(async (req, res, next) => {
-  // get data from request
   let { name, email, password } = req.body;
-  // validation
+ 
   let user = await User.findOne({ email });
   if (user) {
     throw new AppError(400, "User already existed", "Registration Error");
   }
-  // proccess
+  
   const salt = await bcrypt.genSalt(10);
   password = await bcrypt.hash(password, salt);
   user = await User.create({ name, email, password });
@@ -24,7 +23,6 @@ userController.register = catchAsync(async (req, res, next) => {
   });
   const accessToken = await user.generateToken();
 
-  // response
   sendResponse(
     res,
     200,
