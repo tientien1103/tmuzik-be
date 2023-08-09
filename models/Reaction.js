@@ -15,7 +15,7 @@ const reactionSchema = new Schema(
     targetId: {
       type: Schema.Types.ObjectId,
       required: true,
-      refPath: "targetType", //reference tùy vào giá trị targetType
+      refPath: "targetType",
     },
     emoji: {
       type: String,
