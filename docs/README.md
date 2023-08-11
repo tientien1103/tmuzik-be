@@ -6,35 +6,36 @@ Our company wants to develop an application to bring an amazing music experience
 
 ### Authentication
 
-- [] As a user, I want to be able to register for a new account with name, email and password. (gửi code về mail)
-- [] As a user, I want to be able to log in (log out) of my account.
-- [] As a user, I want to be able to stay signed in after refreshing the page.
+- [x] As a user, I want to be able to register for a new account with name, email and password.
+- [x] As a user, I want to be able to log in (log out) of my account.
+- [x] As a user, I want to be able to stay signed in after refreshing the page.
 
 ### Songs
 
-- [] As a user, I want to be able to see a list of songs.
-- [] As a user, I want to be able to search for songs.
+- [x] As a user, I want to be able to see a list of songs.
+- [x] As a user, I want to be able to search for songs.
 
 ### Artists
 
-- [] As a user, I want to be able to see a list of artists.
-- [] As a user, I want to be able to search for artists.
+- [x] As a user, I want to be able to see a list of artists.
+- [x] As a user, I want to be able to see songs of artists.
+- [x] As a user, I want to be able to search for artists.
 
 ### Reactions
 
-- [] As a user, I want to be able to interact with song by liking.
+- [x] As a user, I want to be able to interact with song by liking.
 
 ### Lyrics
 
-- [] As a user, I want to be able to see lyric of each song.
+- [x] As a user, I want to be able to see lyric of each song.
 
 ### Playlists
 
-- [] As a user, I want to be able to listen available playlist.
+- [x] As a user, I want to be able to listen available playlist.
 
 ### Update Profile
 
-- [] As a user, I want to be able to manage my profile by adding profile picture and rename.
+- [x] As a user, I want to be able to manage my profile by adding profile picture and rename.
 
 ## Endpoint APIs
 
