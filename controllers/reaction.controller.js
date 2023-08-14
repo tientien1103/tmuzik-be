@@ -53,15 +53,8 @@ reactionController.saveReaction = catchAsync(async (req, res, next) => {
       author: currentUserId,
       emoji,
     });
-    await mongoose
-      .model(targetType)
-      .findByIdAndUpdate(targetId, { isLiked: true });
   } else {
       await reaction.deleteOne();
-    await mongoose
-      .model(targetType)
-      .findByIdAndUpdate(targetId, { isLiked: false });
-   
   }
 
   const reactions = await calculateReactions(targetId, targetType);
