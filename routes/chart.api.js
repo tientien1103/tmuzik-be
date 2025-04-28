@@ -6,8 +6,8 @@ const chartController = require("../controllers/chart.controller");
 /**
  *@route GET /top-chart?page=1&limit=10
  * @description Get all top song can see with pagination
- * @access Login required
+ * @access Public
  */
-router.get("/", authentication.loginRequired, chartController.getTopChart);
+router.get("/", chartController.getTopChart);
 
 module.exports = router;

@@ -9,18 +9,17 @@ const { param } = require("express-validator");
 /**
  *@route GET /songs?page=1&limit=10
  * @description Get all song can see with pagination
- * @access Login required
+ * @access Public
  */
-router.get("/", authentication.loginRequired, songController.getSongs);
+router.get("/", songController.getSongs);
 
 /**
  * @route GET /songs/:id
  * @description Get single artist
- * @access Login required
+ * @access Public
  */
 router.get(
   "/:id",
-  authentication.loginRequired,
   validators.validate([
     param("id").exists().isString().custom(validators.checkObjectId),
   ]),

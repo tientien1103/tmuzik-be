@@ -8,29 +8,27 @@ const { param } = require("express-validator");
 /**
  * @route GET /artists?page=1&limit=10
  * @description Get all artist can see with pagination
- * @access Login required
+ * @access Public
  */
-router.get("/", authentication.loginRequired, artistController.getArtists);
+router.get("/", artistController.getArtists);
 
 /**
  * @route GET /artists/:id
  * @description Get single artist
- * @access Login required
+ * @access Public
  */
 router.get(
   "/:id",
-  authentication.loginRequired,
   artistController.getSingleArtist
 );
 
 /**
  * @route GET /artists/:id/songs
  * @description Get songs of a artist
- * @access Login required
+ * @access Public
  */
 router.get(
   "/:id/songs",
-  authentication.loginRequired,
   artistController.getSongsByArtist
 );
 

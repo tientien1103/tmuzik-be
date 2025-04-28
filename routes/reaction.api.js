@@ -10,11 +10,10 @@ const router = express.Router();
  * @route POST /reactions
  * @description Save a reaction to song
  * @body {targetId, emoji: "like", "dislike"}
- * @access Login required
+ * @access Public
  */
 router.post(
   "/",
-  authentication.loginRequired,
   validators.validate([
     body("targetId", "Invalid targetId")
       .exists()

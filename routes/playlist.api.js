@@ -6,26 +6,23 @@ const authentication = require("../middlewares/authentication");
 const playlistController = require("../controllers/playlist.controller");
 
 /**
- * /**
  * @route POST /playlists
  * @description Create new playlist
  * @body {name, songs}
- * @access Login required
+ * @access Public
  */
 router.post(
   "/",
-  authentication.loginRequired,
   playlistController.createPlaylist
 );
 
 /**
  * @route GET /playlists/:playlistId
  * @description Get songs of a single playlist
- * @access Login required
+ * @access Public
  */
 router.get(
   "/:playlistId",
-  authentication.loginRequired,
   validators.validate([
     param("playlistId").exists().isString().custom(validators.checkObjectId),
   ]),
@@ -35,8 +32,8 @@ router.get(
 /**
  * @route GET /playlists
  * @description Get playlists
- * @access Login required
+ * @access Public
  */
-router.get("/", authentication.loginRequired, playlistController.getPlaylists);
+router.get("/", playlistController.getPlaylists);
 
 module.exports = router;
